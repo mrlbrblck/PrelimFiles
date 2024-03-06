@@ -103,6 +103,8 @@ public class SignUpFrame extends JFrame {
     private void saveAccountDetails(String name, String username, String password) {
         try (PrintWriter writer = new PrintWriter(new FileWriter("users.txt", true))) {
             writer.println(name + "," + username + "," + password);
+            writer.println("NewUser" + "," + ".20" + "," + "1");
+            writer.println("WarehouseSale" + "," + ".10" + "," + "2");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

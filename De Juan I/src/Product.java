@@ -1,23 +1,29 @@
 public class Product {
-    private String category;
-    private String model;
+    private String type;
+    private String name;
     private double price;
+    private String imagePath; // Path to the image for the product
 
-    public Product(String category, String model, double price) {
-        this.category = category;
-        this.model = model;
+    public Product(String type, String name, double price, String imagePath) {
+        this.type = type;
+        this.name = name;
         this.price = price;
+        this.imagePath = imagePath;
     }
 
-    public String getCategory() {
-        return category;
+    public String getType() {
+        return type;
     }
 
-    public String getModel() {
-        return model;
+    public String getName() {
+        return name;
     }
 
     public double getPrice() {
         return price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

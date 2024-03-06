@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class SellerLandingPage extends JFrame {
     private ProductList productList;
@@ -22,40 +23,42 @@ public class SellerLandingPage extends JFrame {
         panel.add(listingsPanel, BorderLayout.CENTER);
 
         for (Product product : productList.getAllProducts()) {
-            JLabel productLabel = new JLabel("- " + product.getModel());
+            JLabel productLabel = new JLabel("- " + product.getName());
             productLabel.setForeground(Color.WHITE); // Set text color to white
             listingsPanel.add(productLabel);
         }
 
-        // Add listing button
         JButton addListingButton = new JButton("Add Listing");
-        addListingButton.setForeground(Color.BLACK); // Set text color to black
         addListingButton.addActionListener(e -> {
+        
             // Prompt user to add a new product
             String type = JOptionPane.showInputDialog(this, "Enter type of product:");
             String name = JOptionPane.showInputDialog(this, "Enter product name:");
             double price = Double.parseDouble(JOptionPane.showInputDialog(this, "Enter product price:"));
-            // Create the new product
-            Product newProduct = new Product(type, name, price);
-            // Add the new product to the product list
-            productList.addProduct(newProduct);
-            // Update the listings panel
-            JLabel productLabel = new JLabel("- " + newProduct.getModel());
-            productLabel.setForeground(Color.WHITE); // Set text color to white
-            listingsPanel.add(productLabel);
-            panel.revalidate();
-            panel.repaint();
-            
-            // Prompt user to continue or not
-            int choice = JOptionPane.showConfirmDialog(this, "Listing added successfully! Do you want to continue?", "Continue?", JOptionPane.YES_NO_OPTION);
-            if (choice == JOptionPane.NO_OPTION) {
-                // Go back to UserSelectionFrame
-                dispose(); // Close the current frame
-                UserSelectionFrame userSelectionFrame = new UserSelectionFrame(username);
-                userSelectionFrame.setVisible(true); // Display the UserSelectionFrame
-                
-            }
-        });
+            String imagePath = JOptionPane.showInputDialog(this, "Enter image path for product:"); // Prompt for image path
+    
+                // Create the new product
+                Product newProduct = new Product(type, name, price, imagePath);
+                // Add the new product to the product list
+                productList.addProduct(newProduct);
+                // Update the listings panel
+                JLabel productLabel = new JLabel("- " + newProduct.getName());
+                productLabel.setForeground(Color.WHITE); // Set text color to white
+                listingsPanel.add(productLabel);
+                panel.revalidate();
+                panel.repaint();
+    
+    // Prompt user to continue or not
+    int choice = JOptionPane.showConfirmDialog(this, "Listing added successfully! Do you want to continue?", "Continue?", JOptionPane.YES_NO_OPTION);
+    if (choice == JOptionPane.NO_OPTION) {
+        // Go back to UserSelectionFrame
+        dispose(); // Close the current frame
+        UserSelectionFrame userSelectionFrame = new UserSelectionFrame(username);
+        userSelectionFrame.setVisible(true); // Display the UserSelectionFrame
+        
+    }
+});
+
         addListingButton.setBackground(Color.BLACK); // Set button background color to black
         addListingButton.setForeground(Color.WHITE);
         panel.add(addListingButton, BorderLayout.SOUTH);

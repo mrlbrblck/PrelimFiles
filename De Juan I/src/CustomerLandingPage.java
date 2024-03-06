@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class CustomerLandingPage extends JFrame {
     private Cart cart;
@@ -33,6 +34,7 @@ public class CustomerLandingPage extends JFrame {
         cartButton.addActionListener(e -> cart.show());
         JPanel cartButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         cartButtonPanel.add(cartButton);
+        dispose();
         FrameUtilities.stylePanel(cartButtonPanel); // Apply styling to the cartButtonPanel
         add(cartButtonPanel, BorderLayout.SOUTH);
 
@@ -61,26 +63,35 @@ public class CustomerLandingPage extends JFrame {
         JPanel productPanel = new JPanel();
         productPanel.setLayout(new BorderLayout());
         productPanel.setOpaque(false);
+    
+            ImageIcon icon = new ImageIcon(product.getImagePath());
+                Image image = icon.getImage();
+                Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                icon = new ImageIcon(scaledImage);
 
-        JLabel categoryLabel = new JLabel("Category: " + product.getCategory());
-        JLabel modelLabel = new JLabel("Model: " + product.getModel());
-        JLabel priceLabel = new JLabel("Price: PHP " + product.getPrice()); // Display price in PHP
-        JButton addToCartButton = new JButton("Add to Cart");
-
-        JPanel labelsPanel = new JPanel();
-        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
-        labelsPanel.add(categoryLabel);
-        labelsPanel.add(modelLabel);
-        labelsPanel.add(priceLabel);
-
+                JLabel imageLabel = new JLabel(icon);
+                productPanel.add(imageLabel, BorderLayout.WEST);
+    
+                JLabel categoryLabel = new JLabel("Category: " + product.getType());
+                JLabel modelLabel = new JLabel("Model: " + product.getName());
+                JLabel priceLabel = new JLabel("Price: PHP " + product.getPrice()); // Display price in PHP
+                JButton addToCartButton = new JButton("Add to Cart");
+    
+                JPanel labelsPanel = new JPanel();
+                labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+                labelsPanel.add(categoryLabel);
+                labelsPanel.add(modelLabel);
+                labelsPanel.add(priceLabel);
+    
         productPanel.add(labelsPanel, BorderLayout.CENTER);
         productPanel.add(addToCartButton, BorderLayout.EAST);
-
+    
         addToCartButton.addActionListener(e -> {
             cart.addItemToCart(product);
-            JOptionPane.showMessageDialog(this, "Added to Cart: " + product.getModel(), "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Added to Cart: " + product.getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
         });
-
+    
         return productPanel;
     }
+    
 }

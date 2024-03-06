@@ -59,6 +59,7 @@ public class LoginSignUpSelectionFrame extends JFrame {
             remove(headingLabel);
             remove(subheadingLabel);
             remove(buttonPanel);
+            dispose();
             add(new LoginFrame(), BorderLayout.CENTER);
             revalidate();
             repaint();
@@ -69,9 +70,11 @@ public class LoginSignUpSelectionFrame extends JFrame {
             remove(headingLabel);
             remove(subheadingLabel);
             remove(buttonPanel);
+            dispose();
             add(new SignUpFrame(), BorderLayout.CENTER);
             revalidate();
             repaint();
+
         });
 
         buttonPanel.add(loginButton);
@@ -88,9 +91,6 @@ public class LoginSignUpSelectionFrame extends JFrame {
         headerPanel.add(headingLabel, gbc);
         gbc.gridy = 2;
         headerPanel.add(subheadingLabel, gbc);
-
-        add(headerPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.SOUTH);
 
         // Add a filler panel to the east side of the frame
         JPanel fillerPanel = new JPanel();

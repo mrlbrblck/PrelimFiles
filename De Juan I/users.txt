@@ -1,0 +1,3 @@
+Ivan De Juan,dada,dada
+NewUser,.20,1
+WarehouseSale,.10,2
